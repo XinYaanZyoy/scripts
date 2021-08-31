@@ -1,0 +1,1 @@
+python -c "from functions import status; status()"
