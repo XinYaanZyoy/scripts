@@ -69,8 +69,8 @@ def save_followers(followers, dirname):
     if not os.path.exists(basedir):
         os.makedirs(basedir)
     text = ""
-    for follower in followers.items(max_followers_count):
-        print(follower.screen_name)
+    for follower in tqdm(followers.items(max_followers_count)):
+        # print(follower.screen_name)
         text = text+follower.screen_name+"\n"
     # print("FILE:", text)
     with open(os.path.join(basedir, "followers.txt"), "w+") as f:

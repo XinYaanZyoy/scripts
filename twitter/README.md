@@ -17,6 +17,8 @@
 
 - ./functions.py include all the api implementation functions and also some run functions
 
-- there are two run functions availible, sync and status, which can be run by corresponding bash scripts.
+- there are two run functions availible, ./sync.sh and ./status.sh, which can be run by corresponding bash scripts.
 
-- the run bash script just runs both the run scripts in order.
+- the ./run.sh bash script just runs both the run scripts in order.
+
+- the ./clean.sh cleans old data from ./data (except last and latest files and correspnding source directories)
