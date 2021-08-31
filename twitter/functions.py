@@ -3,6 +3,7 @@ import os
 import tweepy
 from datetime import datetime
 from tqdm import tqdm
+import json
 
 # import configs
 from config import *
@@ -37,7 +38,7 @@ def reply():
 
 def get_followers(api):
     print("fetching followers...")
-    followers = tweepy.Cursor(api.followers, screen_name)
+    followers = tweepy.Cursor(api.followers, screen_name, count=count_per_page)
     print("FETCHED")
     return followers
 
@@ -144,9 +145,6 @@ def status():
     last_flag, last_followers = get_last_followers()
     latest_flag, latest_followers = get_latest_followers()
     print("FLAGS:", last_flag, latest_flag)
-    # print("TYPES:", type(last_followers.split()), type(latest_followers.split()))
-    # print("LAST: \n", last_followers.split())
-    # print("LATEST: \n", latest_followers.split())
     if last_flag and latest_flag:
         unfollowers = get_unfollowers(last_followers, latest_followers)
         print("UNFOLLOWERS: ", unfollowers)
@@ -155,3 +153,13 @@ def status():
     else:
         print("STOPPING: Nothing/Ambiguity to compare")
 
+
+def api_stat():
+    api = init_api(login())
+    stat = api.rate_limit_status()
+    status = stat['resources']['followers']['/followers/list']
+    lim = status['limit']
+    rem = status['remaining']
+    res = status['reset']
+    print("LIMSTAT: /followers/list =", rem, '/', lim)
+    print("RESET: /followers/list =", datetime.fromtimestamp(res).strftime('%H:%M:%S'))
