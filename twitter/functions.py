@@ -45,7 +45,7 @@ def get_followers(api):
 
 def update_database(dirname):
     print("Updating database...")
-    basedir = os.path.join("data")
+    basedir = os.path.join("data", screen_name)
     latest = ""
     last = ""
     with open(os.path.join(basedir, "latest"), "r") as f:
@@ -66,7 +66,7 @@ def update_database(dirname):
 
 def save_followers(followers, dirname):
     print("Saving list of followers...")
-    basedir = os.path.join("data", dirname)
+    basedir = os.path.join("data", screen_name, dirname)
     if not os.path.exists(basedir):
         os.makedirs(basedir)
     text = ""
@@ -81,7 +81,7 @@ def save_followers(followers, dirname):
 
 def get_last_followers():
     print("Reading LAST...")
-    basedir = os.path.join("data")
+    basedir = os.path.join("data", screen_name)
     last = ""
     with open(os.path.join(basedir, "last"), "r") as f:
         last = f.read()
@@ -101,7 +101,7 @@ def get_last_followers():
 
 def get_latest_followers():
     print("Reading LATEST...")
-    basedir = os.path.join("data")
+    basedir = os.path.join("data", screen_name)
     latest = ""
     with open(os.path.join(basedir, "latest"), "r") as f:
         latest = f.read()
